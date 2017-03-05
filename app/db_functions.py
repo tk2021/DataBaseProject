@@ -2,7 +2,16 @@ import pyodbc
 
 
 def db_test():
-	cnxn = pyodbc.connect('DRIVER={Oracle in instantclient_12_1};SERVER=//oracle.cise.ufl.edu:1521/orcl;UID=tk1;PWD=canada55')
+	#cnxn = pyodbc.connect('Driver={Microsoft ODBC for Oracle};Server=//oracle.cise.ufl.edu:1521/orcl;Uid=tk1;Pwd=canada55')
+
+	cnxn = pyodbc.connect('''  Driver={Microsoft ODBC for Oracle};(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = oracle.cise.ufl.edu)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )''')
+
 
 	SQL = "select * from TEAMMEMBER where playerID = 'adamste01';"
 

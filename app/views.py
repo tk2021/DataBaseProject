@@ -3,6 +3,9 @@ from app import app
 from .forms import SearchForm
 from app import db_functions
 from .db_functions import db_test
+from app import cx_oracle_test
+from .cx_oracle_test import cx_oracle_test
+import cx_Oracle
 
 @app.route('/index')
 def index(position):
@@ -13,6 +16,15 @@ def index(position):
 def test():
 	db_test()
 	return
+
+@app.route('/cx_oracle_test')
+def cx_test():
+	data = cx_oracle_test()
+	queryString = ""
+	for currentAtt in range(1, len(data)):
+		queryString = queryString +  str(data[currentAtt]) + "  "
+	flash('Query Result : "%s"' % queryString)
+	return render_template('index.html')
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/search', methods=['GET', 'POST'])
