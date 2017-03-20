@@ -1,0 +1,33 @@
+Fields
+
+//Player
+Player Name: 
+Team:	
+Position:
+Year(YYYY, or YYYY-YYYY):
+
+
+//Batting
+Avg(0.xxx-1.000):
+AtBats(xxx-xxx):
+Hits(xxx-xxx):
+Runs(xxx-xxx):
+RBI(xxx-xxx):
+StrikeOuts(BATTING)(xxx-xxx):
+StolenBases(xx-xx):
+SuccessfulSteals(xx.xx-xx.xx):
+HomeRuns(xx-xx):
+Games(xxx-xxx):
+
+//Pitching
+
+
+
+
+insert into teamMember(playerId, birthDate, BirthCountry, birthState, birthCity, deathDate, deathCountry, deathState, deathCity, Name, Weight, Height, Bats, Throws) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+insert into BattingStatistics(PId, Year, playerStint, TeamId, Games, AtBats, Runs, Hits, Doubles, Triples, Homeruns, RBI, StolenBases, CaughtStealing, Walks, strikeOuts, intentionalWalks, hitByPitch, sacrificedHits, sacrificeFlies, groundedIntoDoublePlay) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+"insert into DefensiveStatistics(PId, Year, playerStint, TeamId, Position, Games, GamesStarted, TimePlayedInField, Putouts, Assists, Errors, DoublePlays, PassedBalls, WildPitches, StolenBasesAllowed, CaughtStealing) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+"insert into Pitcher(PlayerId, Year, TeamId, Wins, Losses, Games, GamesStarted, CompleteGames, Shutouts, Saves, OutsPitched, Hits, EarnedRuns, HomeRunsAgainst, Walks, Strikeouts, opponentBattingAverage, ERA, IntentionalWalks, WildPitches, BattersHitByPitch, balls, BattersFacedByPitcher, GamesFinished, RunsAllowed, SacrificesByOpposingBatters, GroundedIntoDoublePlay) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
