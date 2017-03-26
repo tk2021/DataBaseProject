@@ -17,9 +17,9 @@ def cx_oracle_test():
 
 	cursor = db.cursor()
 
-	queryCursor = cursor.execute(SQL);
+	queryCursor = cursor.execute(SQL)
 
-	data = queryCursor.fetchone();
+	data = queryCursor.fetchall()
 
 	for i in data:
 		print (data)

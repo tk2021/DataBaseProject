@@ -14,3 +14,6 @@ def positionValidation(form, field):
 
 class SearchForm(Form):
 	position = StringField('position', [positionValidation, DataRequired()])
+
+class SQLForm(Form):
+	SQL = StringField('SQL', [DataRequired()])
