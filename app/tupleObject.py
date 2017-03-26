@@ -3,7 +3,7 @@ class tupleObject:
 	x = 0
 
 	def __init__(self, attributeList):
-		attributes = attributeList
+		self.attributes = attributeList
 		x = 9
 
 	def __iter__(self):

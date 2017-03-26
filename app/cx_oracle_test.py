@@ -34,3 +34,28 @@ def cx_oracle_test():
 
 	return data
 
+def getQueryCursor(SQL):
+
+	host = 'oracle.cise.ufl.edu'
+	port = 1521
+	sid = 'orcl'
+	dsn_tns = cx_Oracle.makedsn(host, port, sid)
+
+	db = cx_Oracle.connect('tk1', 'canada55', dsn_tns)
+
+	cursor = db.cursor()
+
+	queryCursor = cursor.execute(SQL)
+
+	del db
+	del cursor
+
+	return queryCursor
+
+def getAttributeDescriptions(queryCursor):
+	attributeDescriptions = []
+
+	for i in range (len(queryCursor.description)):
+		attributeDescriptions.append(queryCursor.description[i][0])
+
+	return attributeDescriptions;

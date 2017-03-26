@@ -12,20 +12,29 @@
 		<h1> Table </h1>
 			<style>table, th, tr, td {
 	   				border: 1px solid black;
-			}</style>
+			}
+			table {
+    			border-collapse: collapse;
+			}
+			</style>
 			<table>
 				<tr>
 					{% for attributeName in attributeNames %}
-					<th>{{ attributeName }}</th>
+					<th>
+					{{ attributeName }}
+					</th>
 					{% endfor %}
 				</tr>
-				{% for tuple in tuples %}
-					<tr>
-						<!*{% for attribute in tuple %}
-						<tc>{{ attribute }}</tc>
+			
+					<TBODY>
+						{% for tuple in tuples %}
+							<tr>
+								{% for attribute in tuple %}
+								<td>{{ attribute }}</td>
+								{% endfor %}
+							</tr>
 						{% endfor %}
-					</tr>
-				{% endfor %}
+					</TBODY>
 
 			</table>
 

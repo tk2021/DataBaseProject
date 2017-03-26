@@ -5,7 +5,7 @@ from app import db_functions
 from .db_functions import db_test
 from.tupleObject import tupleObject
 from app import cx_oracle_test
-from .cx_oracle_test import cx_oracle_test
+from .cx_oracle_test import cx_oracle_test, getQueryCursor, getAttributeDescriptions
 import cx_Oracle
 
 @app.route('/index/<position>')
@@ -35,8 +35,9 @@ def displayTable(sqlQuery):
 
 @app.route('/sql_submission', methods=['GET', 'POST'])
 def queryDB():
-	attributeNames = ['A', 'B', 'C', 'D', 'E']
-	tuples = [tupleObject([1,2,3,4,5]), tupleObject([2,2,3,4,5]), tupleObject([3,2,3,4,5]), tupleObject([4,2,3,4,5])]
+	queryCursor = getQueryCursor("select * from team")
+	attributeNames = getAttributeDescriptions(queryCursor)
+	tuples = queryCursor.fetchall()
 	form = SQLForm()
 	if form.validate_on_submit():
 		flash('Query Entered "%s"' %
@@ -46,7 +47,8 @@ def queryDB():
 							title = 'SQL',
 							form = form,
 							attributeNames = attributeNames,
-							tuples = tuples)
+							tuples = tuples
+							)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/search', methods=['GET', 'POST'])
