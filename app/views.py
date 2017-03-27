@@ -27,9 +27,22 @@ def cx_test():
 	flash('Query Result : "%s"' % queryString)
 	return render_template('index.html')
 
-@app.route('/table_test/<sqlQuery>')
+@app.route('/table_test/<sqlQuery>', methods=['GET', 'POST'])
 def displayTable(sqlQuery):
-	return render_template('base.html')
+	queryCursor = getQueryCursor(sqlQuery)
+	attributeNames = getAttributeDescriptions(queryCursor)
+	tuples = queryCursor.fetchall()
+	form = SQLForm()
+	if form.validate_on_submit():
+		flash('Query Entered "%s"' %
+		(form.SQL.data))
+		return redirect(url_for('displayTable', sqlQuery = form.SQL.data))
+	return render_template('sql.html',
+							title = 'SQL',
+							form = form,
+							attributeNames = attributeNames,
+							tuples = tuples
+							)
 
 #app.add_url_rule('/table_test', displayTable)
 
