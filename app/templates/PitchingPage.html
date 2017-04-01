@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset = "utf-8">
+  <title> Baseball Hub </title>
+  <meta name = "viewport" content = "width=device - width, initial scale = 1.0">
+
+  <link href="styleSheet.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+select {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.submission[type=submit] {
+    width: 100%;
+    background-color: #0059b3;
+    color: white;
+    padding: 12px 14px;
+    margin: 8px 0;
+    border: 1px solid #888;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.playerTypeBox{
+  width: 25%;
+   padding: 20px;
+   display: inline-block;
+}
+.playerType{
+  background-color: #000066;
+  color: white;
+  padding: 12px 14px;
+    border: 1px solid #AAA;
+    border-radius: 8px;
+    margin: 4px 2px;
+
+}
+
+input[type=number]{
+    width: 100%;
+    padding: 12px 14px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.submission[type=submit]:hover {
+    background-color: #00264d;
+}
+
+.advancedSearch {
+  width: 20%;
+    border-radius: 8px;
+    background-color: #99ccff;
+    padding: 20px;
+}
+</style>
+
+  </head>
+
+<body style="background-color:  #ccddff">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">BaseballHub</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="DBWebsite.html">Home</a></li>
+          <li class= "active"><a href="statsPage.html">Check Out Stats!</a></li>
+          <li><a href="teamPage.html">Pick Your Team!</a></li>
+        </ul>
+        <form class="navbar-form navbar-left">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+
+<p style="white-space: pre; margin-bottom: 2%"></p>
+  
+ <div class = "playerTypeBox">
+  <form style="display: inline" action="statsPage.html" method="get">
+  <button class = "playerType">Batting</button>
+  </form>
+
+  <form style="display: inline" action="PitchingPage.html" method="get">
+  <button class = "playerType" style="background-color: #00001a">Pitching</button>
+  </form>
+
+  <form style="display: inline" action="FieldingPage.html" method="get">
+  <button class = "playerType">Fielding</button>
+  </form>
+</div>
+    <div class ="advancedSearch">
+  <form action="" autocomplete="on">
+<label for="pName">Player Name</label>
+    <input style = " width: 100%; padding: 12px 14px;  margin: 4px 0; display: inline-block; border: 1px solid #888; border-radius: 8px; box-sizing: border-box;" type="text" id="pName" name="player name" placeholder="Name..">
+
+<label for="Year">Year (1871-2015)</label>
+  <input type="number" name="playingYear" min="1871" max="2015"><br>
+
+
+    <label for="Teams">Team</label>
+    <select id="Team" name="teams">
+    <option value="allTeams"></option>
+      <option value="Arizona">Arizona Diamondbacks</option>
+      <option value="Atlanta">Atlanta Braves</option>
+      <option value="Baltimore">Baltimore Orioles</option>
+      <option value="Boston">Boston Red Sox</option>
+      <option value="Chicago">Chicago Cubs</option>
+      <option value="ChicagoW">Chicago White Sox</option>
+      <option value="Cincinnati">Cincinnati Reds</option>
+      <option value="Cleveland">Cleveland Indians</option>
+      <option value="Colorado">Colorado Rockies</option>
+      <option value="Detroit">Detroit Tigers</option>
+      <option value="Houston">Houston Astros</option>
+      <option value="Kansas_City">Kansas City Royals</option>
+      <option value="Los_Angeles_Angels">Los Angeles Angels</option>
+      <option value="Los_Angeles_Dodgers">Los Angeles Dodgers</option>
+      <option value="Miami">Miami Marlins</option>
+      <option value="Milwaukee">Milwaukee Brewers</option>
+      <option value="Minnesota">Minnesota Twins</option>
+      <option value="New_York_Mets">New York Mets</option>
+      <option value="New_York_Yankees">New York Yankees</option>
+      <option value="Oakland">Oakland Athletics</option>
+      <option value="Philadelphia">Philadelphia Phillies</option>
+      <option value="Pittsburgh">Pittsburgh Pirates</option>
+      <option value="San_Diego">San Diego Padres</option>
+      <option value="San_Francisco">San Francisco Giants</option>
+      <option value="Seattle">Seattle Mariners</option>
+      <option value="St_Louis">St.Louis Cardinals</option>
+      <option value="Tampa_Bay">Tampa Bay Rays</option>
+      <option value="Texas">Texas Rangers</option>
+      <option value="Toronto">Toronto Blue Jays</option>
+      <option value="Washington">Washington Nationals</option>
+    </select>
+
+   <label for="Games">Games (0 - 110)</label>
+  <input type="number" name="gamesPlayed" min="0" max="110"><br>
+
+  <label for="GamesStarted">Games Started (0 - 75)</label>
+  <input type="number" name="gamesStarted" min="0" max="75"><br>
+
+   <label for="Wins">Wins (0 - 60)</label>
+  <input type="number" name="numberOfWins" min="0" max="60"><br>
+
+    <label for="Losses">Losses (0 - 60)</label>
+  <input type="number" name="numberOfLosses" min="0" max="60"><br>
+
+  <label for="CompleteGames">Complete Games (0 - 75)</label>
+  <input type="number" name="completeGames" min="0" max="75"><br>
+
+  <label for="Saves">Saves (0 - 70)</label>
+  <input type="number" name="Saves" min="0" max="70"><br>
+
+  <label for="HitsAllowed">Hits Allowed</label>
+  <select id="allowedHits" name="HitsAllow">
+      <option value="AllHits"></option>
+      <option value="BetweenZeroAndOneHundred"> 0 - 100</option>
+      <option value="Between100And200">101 - 200</option>
+      <option value="Between200And300">201 - 300</option>
+      <option value="Between300And400">301 - 400</option>
+      <option value="Between400And500">401 - 500</option>
+      <option value="Between500And600">501 - 600</option>
+      <option value="Between600And700">601 - 700</option>
+      <option value="Between700And800">701 - 800</option>
+   </select>
+
+<label for="Strikes">Strikeouts</label>
+  <select id="Strikeouts" name="Strikeouts">
+      <option value="AllStrikeouts"></option>
+      <option value="BetweenZeroAndOneHundred"> 0 - 100</option>
+      <option value="Between100And200">101 - 200</option>
+      <option value="Between200And300">201 - 300</option>
+      <option value="Between300And400">301 - 400</option>
+      <option value="Between400And500">401 - 500</option>
+      <option value="Between500And600">501 - 600</option>
+  </select>
+
+  <label for="ERA">ERA</label>
+  <select id="earnedRunAverage" name="earnedRunAvg">
+      <option value="AllERAs"></option>
+      <option value="BetweenZeroAndOne"> 0.00 - 0.99</option>
+      <option value="Between1And2">1.00 - 1.99</option>
+      <option value="Between2And3">2.00 - 2.99</option>
+      <option value="Between3And4">3.00 - 3.99</option>
+      <option value="Between4And5">4.00 - 4.99</option>
+      <option value="Between5And6">5.00 - 10.00</option>
+       <option value="greaterThan10">> 10.00</option>
+  </select>
+
+  <label for="Walks">Walks</label>
+  <select id="Walks" name="Walks">
+      <option value="AllWalks"></option>
+      <option value="Between0And50"> 0 - 50</option>
+      <option value="Between50And100">51 - 100</option>
+      <option value="Between100And150">101 - 150</option>
+      <option value="Between150And200">151 - 200</option>
+      <option value="Between200And250">201 - 250</option>
+      <option value="Between250And300">251 - 300</option>
+  </select>
+
+    <input class = "submission" type="submit" value="Submit">
+
+  </form>
+</div>
+
+
+ <p style="white-space: pre; margin-bottom: 5%"></p>
+
+    <footer id="contact">
+            <div>
+              <p  style="font-size: 15px" class="foot">BaseballHub</p>
+              </div>
+              <div style="text-align: center">
+                <a href=" "
+                target="_blank">
+                <p class="foot">Contact Us!</p>
+              </a> 
+    </footer>
+
+  </body>
+</html>

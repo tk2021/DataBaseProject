@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Search for Player by Position</h1>
+	<form action="" method="post" name="Search">
+		{{ form.hidden_tag() }}
+		<p>
+			Please select a Position:<br>
+			{{ form.position(size=80) }}<br>
+		</p>
+		<p><input type="submit" value="Search"></p>
+	</form>
+{% endblock %}
