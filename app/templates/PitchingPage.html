@@ -155,7 +155,20 @@ input[type=number]{
       <option value="Washington">Washington Nationals</option>
     </select>
 
-   <label for="Games">Games (0 - 110)</label>
+  <label for="Games">Hits Allowed</label>
+  <select id="allowedHits" name="HitsAllow">
+      <option value="AllHits"></option>
+      <option value="BetweenZeroAndOneHundred"> 0 - 100</option>
+      <option value="Between100And200">101 - 200</option>
+      <option value="Between200And300">201 - 300</option>
+      <option value="Between300And400">301 - 400</option>
+      <option value="Between400And500">401 - 500</option>
+      <option value="Between500And600">501 - 600</option>
+      <option value="Between600And700">601 - 700</option>
+      <option value="Between700And800">701 - 800</option>
+   </select>    
+
+<!--    <label for="Games">Games (0 - 110)</label>
   <input type="number" name="gamesPlayed" min="0" max="110"><br>
 
   <label for="GamesStarted">Games Started (0 - 75)</label>
@@ -171,7 +184,66 @@ input[type=number]{
   <input type="number" name="completeGames" min="0" max="75"><br>
 
   <label for="Saves">Saves (0 - 70)</label>
-  <input type="number" name="Saves" min="0" max="70"><br>
+  <input type="number" name="Saves" min="0" max="70"><br> -->
+
+  <label for="Games">Games</label>
+  <select id="Games" name="Game">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndTwenty">0 - 20</option>
+      <option value="Between20And40">21 - 40</option>
+      <option value="Between40And60">41 - 60</option>
+      <option value="Between60And80">61 - 80</option>
+      <option value="Between80And100">81 - 100</option>
+      <option value="Between100And120">101 - 120</option>
+   </select>
+
+   <label for="GamesStarted">Games Started</label>
+  <select id="GamesS" name="GameS">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+   </select>
+
+   <label for="Wins">Wins</label>
+  <select id="Wins" name="Win">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+  </select>
+
+  <label for="Losses">Losses</label>
+  <select id="Loss" name="Loss">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+  </select>
+
+   <label for="completedGames">Complete Games</label>
+  <select id="completeGames" name="completegames">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+   </select>
+
+    <label for="Saves">Saves</label>
+  <select id="Saves" name="save">
+      <option value="AllSaves"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+   </select>
 
   <label for="HitsAllowed">Hits Allowed</label>
   <select id="allowedHits" name="HitsAllow">
