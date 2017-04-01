@@ -1,32 +1,37 @@
 def battingQueryGenerator(playerName, year, team, position, battingAvg,
-                            hits, homeRuns,rbi, steals):
-    Select = "Select p.name, b.year, t.name, b.position, battingAverage, b.hits, b.homeruns, b.RBI, b.steals"
-    From = " From TeamMember p, BattingStatistics b, AllStar a, Team t, (Select bat.batterID, bat.year, trunc((Sum(bat.hits)/Sum(bat.atBats) + 0.00001)), 3) as battingAvg from BattingStatistics bat, TeamMember mem Where mem.teamMemberID = bat.batterID group by bat.batterID, bat.year) d"
-    Where = " Where TeamMember.teamMemberID = BattingStatistics.batterID and TeamMember.teamID = Team.teamID"
+                            hits, homeRuns,rbi, steals, stolenBasesRatio):
+    Select = "Select p.name, b.year, t.name, d.battingAvg, b.hits, b.homeruns, b.RBI, b.steals, b.strikeouts, c.stolenBasesRatio"
+    From = " From TeamMember p, BattingStatistics b, AllStar a, Team t, (Select bat.batterID, bat.year, trunc((Sum(bat.hits)/Sum(bat.atBats) + 0.00001)), 3) as battingAvg from BattingStatistics bat, TeamMember mem Where mem.teamMemberID = bat.batterID group by bat.batterID, bat.year) d," + 
+    + " (select batter.batterId, batter.year, trunc((Sum(batter.stolenBases)/(Sum(batter.caughtStealing) + Sum(batter.stolenBases) + 0.00001)), 3) * 100 as stolenBasesRatio from BattingStatistics batter, TeamMember memberr Where memberr.teamMemberId = batter.batterId group by batter.batterID, batter.year) c"
+    Where = " Where p.teamMemberID = b.batterID and p.teamID = t.teamID and d.batterId = b.batterId and d.year = b.year and c.year = b.year and c.batterId = b.batterId"
     Query = Select + From + Where
     if playerName:
-        Query = Query + " and TeamMember.name like \'%" + playerName + "%\'"
+        Query = Query + " and p.name like \'%" + playerName + "%\'"
     if year:
-        Query = Query + " and BattingStatistics.year = " + year
+        Query = Query + " and b.year = " + year
     if team:
-        Query = Query + " and Team.name like \'%" + team + "%\'"
-    if position:
-        Query = Query + " and BattingStatistics.position = " + position
+        Query = Query + " and t.name like \'%" + team + "%\'"
     if battingAvg:
         battingAvg.split("-")
-        Query = Query + " and battingAverage >= " + battingAvg[0] + " and battingAverage <= " + battingAvg[2]
+        Query = Query + " and d.battingAvg >= " + battingAvg[0] + " and d.battingAvg <= " + battingAvg[2]
     if hits:
         hits.split("-")
-        Query = Query + " and hits >= " + hits[0] + " and hits <= " + hits[2]
+        Query = Query + " and b.hits >= " + hits[0] + " and b.hits <= " + hits[2]
     if homeRuns:
         homeRuns.split("-")
-        Query = Query + " and homeRuns >= " + homeRuns[0] + " and homeRuns <= " + homeRuns[2]
+        Query = Query + " and b.homeRuns >= " + homeRuns[0] + " and b.homeRuns <= " + homeRuns[2]
     if rbi:
         rbi.split("-")
-        Query = Query + " and RBI >= " + rbi[0] + " and RBI <= " + rbi[2]
+        Query = Query + " and b.RBI >= " + rbi[0] + " and b.RBI <= " + rbi[2]
     if steals:
         steals.split("-")
-        Query = Query + " and steals >= " + steals[0] + " and steals <= " + steals[2]
+        Query = Query + " and b.steals >= " + steals[0] + " and b.steals <= " + steals[2]
+    if strikeOuts:
+        steals.split("-")
+        Query = Query + " and b.strikeOuts >= " + steals[0] + " and b.strikeOuts <= " + steals[2]
+    if stolenBasesRatio:
+        stolenBasesRatio.split("-")
+        Query = Query + " and c.stolenBasesRatio >= " + stolenBasesRatio[0] + " and c.stolenBasesRatio <= " + stolenBasesRatio[2]
     return (Query)
 
 def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
