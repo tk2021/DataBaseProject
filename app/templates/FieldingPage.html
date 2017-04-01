@@ -169,8 +169,19 @@ input[type=number]{
       <option value="outfield">OF</option>
    </select>
 
-    <label for="Games">Games (0 - 170)</label>
-  <input type="number" name="gamesPlayed" min="0" max="170"><br>
+  <label for="Games">Games</label>
+  <select id="Games" name="Game">
+      <option value="Allgames"></option>
+      <option value="BetweenZeroAndTwenty">0 - 20</option>
+      <option value="Between20And40">21 - 40</option>
+      <option value="Between40And60">41 - 60</option>
+      <option value="Between60And80">61 - 80</option>
+      <option value="Between80And100">81 - 100</option>
+      <option value="Between100And120">101 - 120</option>
+      <option value="Between120And140">121 - 140</option>
+      <option value="Between140And160">141 - 160</option>
+      <option value="Between160And180">161 - 180</option>
+   </select>
 
 
 <label for="assists">Assists</label>
@@ -185,11 +196,29 @@ input[type=number]{
       <option value="Between600And700">601 - 700</option>
    </select>
 
-    <label for="CaughtStealing">Caught Stealing (0 - 90)</label>
-  <input type="number" name="CS" min="0" max="90"><br>
 
-   <label for="StolenBasesAllowed">Stolen Bases Allowed (0 - 160)</label>
-  <input type="number" name="SBA" min="0" max="160"><br>
+  <label for="CaughtStealing">Caught Stealing</label>
+  <select id="CS" name="caughtSteal">
+      <option value="AllCS"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+      <option value="Between75And90">76 - 90</option>
+   </select>
+
+  <label for="StolenBasesAllowed">Stolen Bases Allowed</label>
+  <select id="SBA" name="StolenBA">
+      <option value="AllSBA"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+      <option value="Between75And90">76 - 90</option>
+   </select>
+
 
    <label for="DP">Double Plays Caused</label>
   <select id="DoublePlayCaused" name="DPC">
@@ -199,9 +228,26 @@ input[type=number]{
       <option value="Between100And150">101 - 150</option>
       <option value="Between150And200">151 - 200</option>
   </select>
-  
+
+  <label for="WildPitches">Wild Pitches</label>
+  <select id="WP" name="wildPitches">
+      <option value="AllWP"></option>
+      <option value="BetweenZeroAndFifteen">0 - 15</option>
+      <option value="Between15And30">16 - 30</option>
+      <option value="Between30And45">31 - 45</option>
+      <option value="Between45And60">46 - 60</option>
+      <option value="Between60And75">61 - 75</option>
+</select>
+
+  <!-- <label for="CaughtStealing">Caught Stealing (0 - 90)</label>
+  <input type="number" name="CS" min="0" max="90"><br>
+
+  <label for="StolenBasesAllowed">Stolen Bases Allowed (0 - 160)</label>
+  <input type="number" name="SBA" min="0" max="160"><br>
+
   <label for="WildPitches">Wild Pitches (0 - 70)</label>
-  <input type="number" name="wild" min="0" max="70"><br>
+  <input type="number" name="wild" min="0" max="70"><br> -->
+
 
     <input class = "submission" type="submit" value="Submit">
 

@@ -120,7 +120,7 @@ input[type=number]{
 <label for="Year">Year (1871-2015)</label>
   <input type="number" name="numberOfSteals" min="1871" max="2015"><br>
 
-    <label for="Teams">Teams</label>
+    <label for="Teams">Team</label>
     <select id="Team" name="teams">
     <option value="allTeams"></option>
       <option value="Arizona">Arizona Diamondbacks</option>
@@ -154,38 +154,62 @@ input[type=number]{
       <option value="Toronto">Toronto Blue Jays</option>
       <option value="Washington">Washington Nationals</option>
     </select>
-  
-    <label for="Position">Position</label>
-    <select id="Pos" name="positions">
-      <option value="AllPositions"></option>
-      <option value="Catcher">C</option>
-      <option value="firstbase">1B</option>
-      <option value="secondbase">2B</option>
-      <option value="thirdbase">3B</option>
-      <option value="shortstop">SS</option>
-      <option value="leftfield">LF</option>
-      <option value="centerfield">CF</option>
-      <option value="rightfield">RF</option>
-      <option value="designatedhitter">DH</option>
-      <option value="outfield">OF</option>
-   </select>
 
 <label for="BA">Batting Average (0.000 - 1.000)</label>
   <select id="average" name="BAvg">
       <option value="AllAverages"></option>
-      <option value="lessThanOneHundred"><=0.100</option>
-      <option value="Between100And200">>0.100 and <=0.200</option>
-      <option value="Between200And300">>0.200 and <=0.300</option>
-      <option value="Between300And400">>0.300 and <=0.400</option>
-      <option value="Between400And500">>0.400 and <=0.500</option>
-      <option value="Between500And600">>0.500 and <=0.600</option>
-      <option value="Between600And700">>0.600 and <=0.700</option>
-      <option value="Between700And800">>0.700 and <=0.800</option>
-      <option value="Between800And900">>0.800 and <=0.900</option>
-      <option value="Between900And1000">>0.900 and <=1.000</option>
+      <option value="lessThanOneHundred">0.000 - 0.100</option>
+      <option value="Between100And200">0.101 - 0.200</option>
+      <option value="Between200And300">0.201 - 0.300</option>
+      <option value="Between300And400">0.301 - 0.400</option>
+      <option value="Between400And500">0.401 - 0.500</option>
+      <option value="Between500And600">0.501 - 0.600</option>
+      <option value="Between600And700">0.601 - 0.700</option>
+      <option value="Between700And800">0.701 - 0.800</option>
+      <option value="Between800And900">0.801 - 0.900</option>
+      <option value="Between900And1000">0.901 - 1.000</option>
    </select>
 
-<label for="HomeRuns">Hits (0-270)</label>
+   <label for="Hits">Home Runs</label>
+   <select id="HomeRuns" name="HR">
+      <option value="AllHR"></option>
+      <option value="lessThanTwenty">0 - 20</option>
+      <option value="Between20And40">21 - 40</option>
+      <option value="Between40And60">41 - 60</option>
+      <option value="Between60And80">61 - 80</option>
+   </select>
+
+   <label for="Hits">Hits</label>
+   <select id="Hits" name="hit">
+      <option value="AllHits"></option>
+      <option value="lessThanFifty">0 - 50</option>
+      <option value="Between50And100">51 - 100</option>
+      <option value="Between100And150">101 - 150</option>
+      <option value="Between150And200">151 - 200</option>
+      <option value="Between200And250">201 - 250</option>
+      <option value="Between250And300">251 - 300</option>
+   </select>
+
+   <label for="RBI">RBI</label>
+   <select id="RBI" name="rbi">
+      <option value="AllRBI"></option>
+      <option value="lessThanFifty">0 - 50</option>
+      <option value="Between50And100">51 - 100</option>
+      <option value="Between100And150">101 - 150</option>
+      <option value="Between150And200">151 - 200</option>
+   </select>
+
+   <label for="Steals">Steals</label>
+   <select id="Steals" name="steals">
+      <option value="AllSteals"></option>
+      <option value="lessThanThirty">0 - 30</option>
+      <option value="Between30And60">31 - 60</option>
+      <option value="Between60And90">61 - 90</option>
+      <option value="Between90And120">91 - 120</option>
+      <option value="Between120And150">121 - 150</option>
+   </select>
+
+<!-- <label for="Hits">Hits (0-270)</label>
   <input type="number" name="numberOfHits" min="0" max="270"><br>
 
 <label for="HomeRuns">Home runs (0-80)</label>
@@ -195,7 +219,7 @@ input[type=number]{
   <input type="number" name="numberOfRBIs" min="0" max="200"><br>
 
   <label for="Steals">Steals (0-130)</label>
-  <input type="number" name="numberOfSteals" min="0" max="130"><br>
+  <input type="number" name="numberOfSteals" min="0" max="130"><br> -->
 
 
     <input class = "submission" type="submit" value="Submit">
