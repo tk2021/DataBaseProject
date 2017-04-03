@@ -4,12 +4,11 @@
 
 {% block content %}
 
-
 <p style="white-space: pre; margin-bottom: 2%"></p>
   
- <div class = "playerTypeBox">
+<div class = "playerTypeBox">
   <form style="display: inline" action="statsPage.html" method="get">
-  <button class = "playerType">Batting</button>
+  <button class = "playerType" style="background-color: #00001a">Batting</button>
   </form>
 
   <form style="display: inline" action="PitchingPage.html" method="get">
@@ -17,14 +16,14 @@
   </form>
 
   <form style="display: inline" action="FieldingPage.html" method="get">
-  <button class = "playerType" style="background-color: #00001a">Fielding</button>
+  <button class = "playerType">Fielding</button>
   </form>
 </div>
 
-   <div class="grid-container">
+    <div class="grid-container">
     <div class="row">
 		<div class="col-1">
-  <form action="{{ url_for('formT2') }}" autocomplete="on" method="POST" id="fielding">
+  <form action="{{ url_for('formT2') }}" autocomplete="on" method="POST">
 <label for="pName">Player Name</label>
     <input style = " width: 100%; padding: 12px 14px;  margin: 4px 0; display: inline-block; border: 1px solid #888; border-radius: 8px; box-sizing: border-box;" type="text" id="pName" name="pName" placeholder="Name..">
 
@@ -32,7 +31,7 @@
   <input type="number" name="year" min="1871" max="2015"><br>
 
     <label for="Teams">Team</label>
-    <select id="team" name="team" form="fielding">
+    <select id="team" name="team">
     <option value="allTeams"></option>
       <option value="Arizona Diamondbacks">Arizona Diamondbacks</option>
       <option value="Atlanta Braves">Atlanta Braves</option>
@@ -65,102 +64,76 @@
       <option value="Toronto Blue Jays">Toronto Blue Jays</option>
       <option value="Washington Nationals">Washington Nationals</option>
     </select>
-  
-    <label for="Position">Position</label>
-    <select id="Pos" name="positions">
-      <option value="allPositions"></option>
-      <option value="Catcher">C</option>
-      <option value="firstbase">1B</option>
-      <option value="secondbase">2B</option>
-      <option value="thirdbase">3B</option>
-      <option value="shortstop">SS</option>
-      <option value="leftfield">LF</option>
-      <option value="centerfield">CF</option>
-      <option value="rightfield">RF</option>
-      <option value="designatedhitter">DH</option>
-      <option value="outfield">OF</option>
+
+<label for="BA">Batting Average (0.000 - 1.000)</label>
+  <select id="average" name="BAvg">
+      <option value="AllAverages"></option>
+      <option value="lessThanOneHundred">0.000 - 0.100</option>
+      <option value="Between100And200">0.101 - 0.200</option>
+      <option value="Between200And300">0.201 - 0.300</option>
+      <option value="Between300And400">0.301 - 0.400</option>
+      <option value="Between400And500">0.401 - 0.500</option>
+      <option value="Between500And600">0.501 - 0.600</option>
+      <option value="Between600And700">0.601 - 0.700</option>
+      <option value="Between700And800">0.701 - 0.800</option>
+      <option value="Between800And900">0.801 - 0.900</option>
+      <option value="Between900And1000">0.901 - 1.000</option>
    </select>
 
-  <label for="Games">Games</label>
-  <select id="Games" name="Game">
-      <option value="Allgames"></option>
-      <option value="BetweenZeroAndTwenty">0 - 20</option>
+   <label for="Hits">Home Runs</label>
+   <select id="HomeRuns" name="HR">
+      <option value="AllHR"></option>
+      <option value="lessThanTwenty">0 - 20</option>
       <option value="Between20And40">21 - 40</option>
       <option value="Between40And60">41 - 60</option>
       <option value="Between60And80">61 - 80</option>
-      <option value="Between80And100">81 - 100</option>
-      <option value="Between100And120">101 - 120</option>
-      <option value="Between120And140">121 - 140</option>
-      <option value="Between140And160">141 - 160</option>
-      <option value="Between160And180">161 - 180</option>
    </select>
 
-
-<label for="assists">Assists</label>
-  <select id="assists" name="assists">
-      <option value="AllAssists"></option>
-      <option value="BetweenZeroAndTen">0 - 10</option>
-      <option value="Between10And20">11 - 20</option>
-      <option value="Between20And30">21 - 30</option>
-      <option value="Between30And40">31 - 40</option>
-      <option value="Between40And50">41 - 50</option>
-   </select>
-
-
-  <label for="CaughtStealing">Caught Stealing</label>
-  <select id="CS" name="caughtSteal">
-      <option value="AllCS"></option>
-      <option value="BetweenZeroAndFifteen">0 - 15</option>
-      <option value="Between15And30">16 - 30</option>
-      <option value="Between30And45">31 - 45</option>
-      <option value="Between45And60">46 - 60</option>
-      <option value="Between60And75">61 - 75</option>
-      <option value="Between75And90">76 - 90</option>
-   </select>
-
-  <label for="StolenBasesAllowed">Stolen Bases Allowed</label>
-  <select id="SBA" name="StolenBA">
-      <option value="AllSBA"></option>
-      <option value="BetweenZeroAndFifteen">0 - 15</option>
-      <option value="Between15And30">16 - 30</option>
-      <option value="Between30And45">31 - 45</option>
-      <option value="Between45And60">46 - 60</option>
-      <option value="Between60And75">61 - 75</option>
-      <option value="Between75And90">76 - 90</option>
-   </select>
-
-
-   <label for="DP">Double Plays Caused</label>
-  <select id="DoublePlayCaused" name="DPC">
-      <option value="AllDoublePlaysCaused"></option>
-      <option value="Between0And50"> 0 - 50</option>
+   <label for="Hits">Hits</label>
+   <select id="Hits" name="hit">
+      <option value="AllHits"></option>
+      <option value="lessThanFifty">0 - 50</option>
       <option value="Between50And100">51 - 100</option>
       <option value="Between100And150">101 - 150</option>
       <option value="Between150And200">151 - 200</option>
-  </select>
+      <option value="Between200And250">201 - 250</option>
+      <option value="Between250And300">251 - 300</option>
+   </select>
 
-  <label for="WildPitches">Wild Pitches</label>
-  <select id="WP" name="wildPitches">
-      <option value="AllWP"></option>
-      <option value="BetweenZeroAndFifteen">0 - 15</option>
-      <option value="Between15And30">16 - 30</option>
-      <option value="Between30And45">31 - 45</option>
-      <option value="Between45And60">46 - 60</option>
-      <option value="Between60And75">61 - 75</option>
-</select>
+   <label for="RBI">RBI</label>
+   <select id="RBI" name="rbi">
+      <option value="AllRBI"></option>
+      <option value="lessThanFifty">0 - 50</option>
+      <option value="Between50And100">51 - 100</option>
+      <option value="Between100And150">101 - 150</option>
+      <option value="Between150And200">151 - 200</option>
+   </select>
 
-  <!-- <label for="CaughtStealing">Caught Stealing (0 - 90)</label>
-  <input type="number" name="CS" min="0" max="90"><br>
-  <label for="StolenBasesAllowed">Stolen Bases Allowed (0 - 160)</label>
-  <input type="number" name="SBA" min="0" max="160"><br>
-  <label for="WildPitches">Wild Pitches (0 - 70)</label>
-  <input type="number" name="wild" min="0" max="70"><br> -->
+   <label for="Steals">Steals</label>
+   <select id="Steals" name="steals">
+      <option value="AllSteals"></option>
+      <option value="lessThanThirty">0 - 30</option>
+      <option value="Between30And60">31 - 60</option>
+      <option value="Between60And90">61 - 90</option>
+      <option value="Between90And120">91 - 120</option>
+      <option value="Between120And150">121 - 150</option>
+   </select>
+
+<!-- <label for="Hits">Hits (0-270)</label>
+  <input type="number" name="numberOfHits" min="0" max="270"><br>
+<label for="HomeRuns">Home runs (0-80)</label>
+  <input type="number" name="numberOfHRs" min="0" max="80"><br>
+  <label for="RBI">RBI (0-200)</label>
+  <input type="number" name="numberOfRBIs" min="0" max="200"><br>
+  <label for="Steals">Steals (0-130)</label>
+  <input type="number" name="numberOfSteals" min="0" max="130"><br> -->
 
 
     <input class = "submission" type="submit" value="Submit">
 
   </form>
 </div>
+
 <div class="col-4" style="background-color: #ccddff">
 		<h1> Table </h1>
 			<style>table, th, tr, td {
@@ -208,5 +181,5 @@
     </footer>
 
   </body>
-  
+
  {% endblock %}
