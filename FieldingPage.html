@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<p style="white-space: pre; margin-bottom: 2%"></p>
+  
+ <div class = "playerTypeBox">
+  <form style="display: inline" action="statsPage.html" method="get">
+  <button class = "playerType">Batting</button>
+  </form>
+
+  <form style="display: inline" action="PitchingPage.html" method="get">
+  <button class = "playerType">Pitching</button>
+  </form>
+
+  <form style="display: inline" action="FieldingPage.html" method="get">
+  <button class = "playerType" style="background-color: #00001a">Fielding</button>
+  </form>
+</div>
+
+   <div class="grid-container">
+    <div class="row">
+		<div class="col-1">
+  <form action="{{ url_for('fieldingQ') }}" autocomplete="on" method="POST" id="fielding">
+<label for="pName">Player Name</label>
+    <input style = " width: 100%; padding: 12px 14px;  margin: 4px 0; display: inline-block; border: 1px solid #888; border-radius: 8px; box-sizing: border-box;" type="text" id="pName" name="pName" placeholder="Name..">
+
+<label for="Year">Year (1871-2015)</label>
+  <input type="number" name="year" min="1871" max="2015"><br>
+
+    <label for="Teams">Team</label>
+    <select id="team" name="team" form="fielding">
+    <option value="allTeams"></option>
+      <option value="Arizona Diamondbacks">Arizona Diamondbacks</option>
+      <option value="Atlanta Braves">Atlanta Braves</option>
+      <option value="Baltimore Orioles">Baltimore Orioles</option>
+      <option value="Boston Red Sox">Boston Red Sox</option>
+      <option value="Chicago Cubs">Chicago Cubs</option>
+      <option value="Chicago White Sox">Chicago White Sox</option>
+      <option value="Cincinnati Reds">Cincinnati Reds</option>
+      <option value="Cleveland Indians">Cleveland Indians</option>
+      <option value="Colorado Rockies">Colorado Rockies</option>
+      <option value="Detroit Tigers">Detroit Tigers</option>
+      <option value="Houston Astros">Houston Astros</option>
+      <option value="Kansas City Royals">Kansas City Royals</option>
+      <option value="Los Angeles Angels of Anaheim">Los Angeles Angels of Anaheim</option>
+      <option value="Los Angeles Dodgers">Los Angeles Dodgers</option>
+      <option value="Miami Marlins">Miami Marlins</option>
+      <option value="Milwaukee Brewers">Milwaukee Brewers</option>
+      <option value="Minnesota Twins">Minnesota Twins</option>
+      <option value="New York Mets">New York Mets</option>
+      <option value="New York Yankees">New York Yankees</option>
+      <option value="Oakland Athletics">Oakland Athletics</option>
+      <option value="Philadelphia Phillies">Philadelphia Phillies</option>
+      <option value="Pittsburgh Pirates">Pittsburgh Pirates</option>
+      <option value="San Diego Padres">San Diego Padres</option>
+      <option value="San Francisco Giants">San Francisco Giants</option>
+      <option value="Seattle Mariners">Seattle Mariners</option>
+      <option value="St. Louis Cardinals">St. Louis Cardinals</option>
+      <option value="Tampa Bay Rays">Tampa Bay Rays</option>
+      <option value="Texas Rangers">Texas Rangers</option>
+      <option value="Toronto Blue Jays">Toronto Blue Jays</option>
+      <option value="Washington Nationals">Washington Nationals</option>
+    </select>
+  
+    <label for="Position">Position</label>
+    <select id="Pos" name="positions">
+      <option value=""></option>
+      <option value="C">Catcher</option>
+      <option value="1B">First Baseman</option>
+      <option value="2B">Second Baseman</option>
+      <option value="3B">Third Baseman</option>
+      <option value="SS">Shortstop</option>
+      <option value="DH">Designated Hitter</option>
+      <option value="OF">Outfielder</option>
+	  <option value="P">Pitcher</option>
+   </select>
+
+  <label for="Games">Games</label>
+  <select id="Games" name="games">
+      <option value=""></option>
+      <option value="0-20">0 - 20</option>
+      <option value="21-40">21 - 40</option>
+      <option value="41-60">41 - 60</option>
+      <option value="61-80">61 - 80</option>
+      <option value="81-100">81 - 100</option>
+      <option value="101-120">101 - 120</option>
+      <option value="121-140">121 - 140</option>
+      <option value="141-160">141 - 160</option>
+      <option value="161-180">161 - 180</option>
+   </select>
+
+
+<label for="assists">Assists</label>
+  <select id="assists" name="assists">
+      <option value=""></option>
+      <option value="0-10">0 - 10</option>
+      <option value="11-20">11 - 20</option>
+      <option value="21-30">21 - 30</option>
+      <option value="31-40">31 - 40</option>
+      <option value="41-50">41 - 50</option>
+   </select>
+
+
+  <label for="CaughtStealing">Caught Stealing</label>
+  <select id="CS" name="caughtSteal">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+      <option value="76-90">76 - 90</option>
+   </select>
+
+  <label for="StolenBasesAllowed">Stolen Bases Allowed</label>
+  <select id="SBA" name="stolenBA">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+      <option value="76-90">76 - 90</option>
+   </select>
+
+
+   <label for="DP">Double Plays Caused</label>
+  <select id="DoublePlayCaused" name="doublePC">
+      <option value=""></option>
+      <option value="0-50"> 0 - 50</option>
+      <option value="51-100">51 - 100</option>
+      <option value="101-150">101 - 150</option>
+      <option value="151-200">151 - 200</option>
+  </select>
+
+  <label for="WildPitches">Wild Pitches</label>
+  <select id="WP" name="wildP">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+</select>
+
+  <!-- <label for="CaughtStealing">Caught Stealing (0 - 90)</label>
+  <input type="number" name="CS" min="0" max="90"><br>
+  <label for="StolenBasesAllowed">Stolen Bases Allowed (0 - 160)</label>
+  <input type="number" name="SBA" min="0" max="160"><br>
+  <label for="WildPitches">Wild Pitches (0 - 70)</label>
+  <input type="number" name="wild" min="0" max="70"><br> -->
+
+
+    <input class = "submission" type="submit" value="Submit">
+
+  </form>
+</div>
+<div class="col-4" style="background-color: #ccddff">
+		<h1> Table </h1>
+			<style>table, th, tr, td {
+	   				border: 1px solid black;
+			}
+			table {
+    			border-collapse: collapse;
+			}
+			</style>
+			<table>
+				<tr>
+					{% for attributeName in attributeNames %}
+					<th>
+					{{ attributeName }}
+					</th>
+					{% endfor %}
+				</tr>
+			
+					<TBODY>
+						{% for tuple in tuples %}
+							<tr>
+								{% for attribute in tuple %}
+								<td>{{ attribute }}</td>
+								{% endfor %}
+							</tr>
+						{% endfor %}
+					</TBODY>
+
+			</table>
+ </div>
+ </div>
+</div>
+
+ <p style="white-space: pre; margin-bottom: 5%"></p>
+
+    <footer id="contact">
+            <div>
+              <p  style="font-size: 15px" class="foot">BaseballHub</p>
+              </div>
+              <div style="text-align: center">
+                <a href=" "
+                target="_blank">
+                <p class="foot">Contact Us!</p>
+              </a> 
+    </footer>
+
+  </body>
+  
+ {% endblock %}

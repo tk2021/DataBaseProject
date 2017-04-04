@@ -5,6 +5,7 @@ from app import db_functions
 from .db_functions import db_test
 from.tupleObject import tupleObject
 from app import cx_oracle_test
+from .queryGenerator import battingQueryGenerator, pitchingQueryGenerator, fieldingQueryGenerator
 from .cx_oracle_test import cx_oracle_test, getQueryCursor, getAttributeDescriptions
 import cx_Oracle
 from flask import request
@@ -109,39 +110,98 @@ def form_test():
     return render_template('FieldTester.html', form = form
                             )
 
-@app.route('/formT', methods=['GET', 'POST'])
-def formT():
+@app.route('/batting', methods=['GET', 'POST'])
+def batting():
     return render_template('BattingPage.html'
                             )
 
-@app.route('/formT2', methods=['GET', 'POST'])
-def formT2():
+@app.route('/batting/battingQ', methods=['GET', 'POST'])
+def battingQ():
     if request.method == 'POST':
         pName = request.form.get('pName')
         year = request.form.get('year')
         team = request.form.get('team')
+        position = None;
+        battingAvg = request.form.get('BAvg');
+        HR = request.form.get('HR');
+        hits = request.form.get('hits');
+        rbi = request.form.get('rbi');
+        steals = request.form.get('steals');
+        
+        stolenBasesRatio = None;
+
+        queryCursor = getQueryCursor(battingQueryGenerator(pName, year, team, position, battingAvg,
+                            hits, HR,rbi, steals, stolenBasesRatio))
+
         print (team)
-        queryCursor = getQueryCursor("select * from teammember where name = '" + pName + "'")
+        #queryCursor = getQueryCursor("select * from teammember where name = '" + pName + "'")
         attributeNames = getAttributeDescriptions(queryCursor)
         tuples = queryCursor.fetchall()
         return render_template('BattingPage.html', attributeNames = attributeNames,
                             tuples = tuples
                             )
 
-@app.route('/form_tester/<form>', methods=['GET', 'POST'])
-def form_tester(form):
-    queryCursor = getQueryCursor("select * from teammember where Name = '" + form + "'")
-    attributeNames = getAttributeDescriptions(queryCursor)
-    tuples = queryCursor.fetchall()
-    return render_template('FieldTest2.html', attributeNames = attributeNames,
+@app.route('/pitching', methods=['GET', 'POST'])
+def pitching():
+    return render_template('PitchingPage.html'
+                            ) 
+
+
+@app.route('/pitching/pitchingQ', methods=['GET', 'POST'])
+def pitchingQ():
+    if request.method == 'POST':
+
+        pName = request.form.get('pName')
+        year = request.form.get('year')
+        team = request.form.get('team')
+        games = request.form.get('games');
+        gamesStarted = request.form.get('gameSt');
+        wins = request.form.get('wins');
+        losses = request.form.get('loss');
+        completedGames = request.form.get('completegames');
+        saves = request.form.get('saves');
+        hitsAllowed = request.form.get('hitsAllowed');
+        strikeOuts = request.form.get('strikeouts');
+        era = request.form.get('earnedRunAvg');
+        walks = request.form.get('walks'); 
+
+        queryCursor = getQueryCursor(pitchingQueryGenerator(pName, year, team, games, gamesStarted, wins,
+                            losses, completedGames, saves, hitsAllowed, strikeOuts,
+                            era, walks))
+
+        attributeNames = getAttributeDescriptions(queryCursor)
+        tuples = queryCursor.fetchall()
+        return render_template('PitchingPage.html', attributeNames = attributeNames,
                             tuples = tuples
                             )
-#sqlExample.html
 
+@app.route('/fielding', methods=['GET', 'POST'])
+def fielding():
+    return render_template('FieldingPage.html'
+                            )
 
-@app.route('/fielding_test', methods=['GET', 'POST'])
-def fielding_test():
-    return render_template('FieldTester.html'
+@app.route('/fielding/fieldingQ', methods=['GET', 'POST'])
+def fieldingQ():
+    if request.method == 'POST':
+
+        pName = request.form.get('pName')
+        year = request.form.get('year')
+        team = request.form.get('team')
+        positions = request.form.get('positions');
+        games = request.form.get('games');
+        assists = request.form.get('assists');
+        caughtStealing = request.form.get('caughtSteal');
+        stolenBA = request.form.get('stolenBA');
+        doublePC = request.form.get('doublePC');
+        wildP = request.form.get('wildP'); 
+
+        queryCursor = getQueryCursor(fieldingQueryGenerator(pName, year, team, positions, games, assists,
+                            caughtStealing, stolenBA, doublePC, wildP))
+
+        attributeNames = getAttributeDescriptions(queryCursor)
+        tuples = queryCursor.fetchall()
+        return render_template('FieldingPage.html', attributeNames = attributeNames,
+                            tuples = tuples
                             )
 
 @app.route('/', methods=['GET', 'POST'])

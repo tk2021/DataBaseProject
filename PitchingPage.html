@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<p style="white-space: pre; margin-bottom: 2%"></p>
+  
+ <div class = "playerTypeBox">
+  <form style="display: inline" action="statsPage.html" method="get">
+  <button class = "playerType">Batting</button>
+  </form>
+
+  <form style="display: inline" action="PitchingPage.html" method="get">
+  <button class = "playerType" style="background-color: #00001a">Pitching</button>
+  </form>
+
+  <form style="display: inline" action="FieldingPage.html" method="get">
+  <button class = "playerType">Fielding</button>
+  </form>
+</div>
+    <div class="grid-container">
+    <div class="row">
+		<div class="col-1">
+  <form action="{{ url_for('pitchingQ') }}" autocomplete="on" method="POST">
+<label for="pName">Player Name</label>
+    <input style = " width: 100%; padding: 12px 14px;  margin: 4px 0; display: inline-block; border: 1px solid #888; border-radius: 8px; box-sizing: border-box;" type="text" id="pName" name="pName" placeholder="Name..">
+
+<label for="Year">Year (1871-2015)</label>
+  <input type="number" name="year" min="1871" max="2015"><br>
+
+
+    <label for="Teams">Team</label>
+    <select id="team" name="team">
+    <option value=""></option>
+      <option value="Arizona Diamondbacks">Arizona Diamondbacks</option>
+      <option value="Atlanta Braves">Atlanta Braves</option>
+      <option value="Baltimore Orioles">Baltimore Orioles</option>
+      <option value="Boston Red Sox">Boston Red Sox</option>
+      <option value="Chicago Cubs">Chicago Cubs</option>
+      <option value="Chicago White Sox">Chicago White Sox</option>
+      <option value="Cincinnati Reds">Cincinnati Reds</option>
+      <option value="Cleveland Indians">Cleveland Indians</option>
+      <option value="Colorado Rockies">Colorado Rockies</option>
+      <option value="Detroit Tigers">Detroit Tigers</option>
+      <option value="Houston Astros">Houston Astros</option>
+      <option value="Kansas City Royals">Kansas City Royals</option>
+      <option value="Los Angeles Angels of Anaheim">Los Angeles Angels of Anaheim</option>
+      <option value="Los Angeles Dodgers">Los Angeles Dodgers</option>
+      <option value="Miami Marlins">Miami Marlins</option>
+      <option value="Milwaukee Brewers">Milwaukee Brewers</option>
+      <option value="Minnesota Twins">Minnesota Twins</option>
+      <option value="New York Mets">New York Mets</option>
+      <option value="New York Yankees">New York Yankees</option>
+      <option value="Oakland Athletics">Oakland Athletics</option>
+      <option value="Philadelphia Phillies">Philadelphia Phillies</option>
+      <option value="Pittsburgh Pirates">Pittsburgh Pirates</option>
+      <option value="San Diego Padres">San Diego Padres</option>
+      <option value="San Francisco Giants">San Francisco Giants</option>
+      <option value="Seattle Mariners">Seattle Mariners</option>
+      <option value="St. Louis Cardinals">St. Louis Cardinals</option>
+      <option value="Tampa Bay Rays">Tampa Bay Rays</option>
+      <option value="Texas Rangers">Texas Rangers</option>
+      <option value="Toronto Blue Jays">Toronto Blue Jays</option>
+      <option value="Washington Nationals">Washington Nationals</option>
+    </select>
+
+  <!-- <label for="Games">Hits Allowed</label>
+  <select id="allowedHits" name="hitsAllowed">
+      <option value=""></option>
+      <option value="BetweenZeroAndOneHundred"> 0 - 100</option>
+      <option value="Between100And200">101 - 200</option>
+      <option value="Between200And300">201 - 300</option>
+      <option value="Between300And400">301 - 400</option>
+      <option value="Between400And500">401 - 500</option>
+      <option value="Between500And600">501 - 600</option>
+      <option value="Between600And700">601 - 700</option>
+      <option value="Between700And800">701 - 800</option>
+   </select>  -->  
+
+<!--    <label for="Games">Games (0 - 110)</label>
+  <input type="number" name="gamesPlayed" min="0" max="110"><br>
+  <label for="GamesStarted">Games Started (0 - 75)</label>
+  <input type="number" name="gamesStarted" min="0" max="75"><br>
+   <label for="Wins">Wins (0 - 60)</label>
+  <input type="number" name="numberOfWins" min="0" max="60"><br>
+    <label for="Losses">Losses (0 - 60)</label>
+  <input type="number" name="numberOfLosses" min="0" max="60"><br>
+  <label for="CompleteGames">Complete Games (0 - 75)</label>
+  <input type="number" name="completeGames" min="0" max="75"><br>
+  <label for="Saves">Saves (0 - 70)</label>
+  <input type="number" name="Saves" min="0" max="70"><br> -->
+
+  <label for="Games">Games</label>
+  <select id="Games" name="games">
+      <option value=""></option>
+      <option value="0-20">0 - 20</option>
+      <option value="21-40">21 - 40</option>
+      <option value="41-60">41 - 60</option>
+      <option value="61-80">61 - 80</option>
+      <option value="81-100">81 - 100</option>
+      <option value="101-120">101 - 120</option>
+   </select>
+
+   <label for="GamesStarted">Games Started</label>
+  <select id="GamesS" name="GameSt">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+   </select>
+
+   <label for="Wins">Wins</label>
+  <select id="Wins" name="wins">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+  </select>
+
+  <label for="Losses">Losses</label>
+  <select id="Loss" name="loss">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+  </select>
+
+   <label for="completedGames">Complete Games</label>
+  <select id="completeGames" name="completegames">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+   </select>
+
+    <label for="Saves">Saves</label>
+  <select id="Saves" name="saves">
+      <option value=""></option>
+      <option value="0-15">0 - 15</option>
+      <option value="16-30">16 - 30</option>
+      <option value="31-45">31 - 45</option>
+      <option value="46-60">46 - 60</option>
+      <option value="61-75">61 - 75</option>
+   </select>
+
+  <label for="HitsAllowed">Hits Allowed</label>
+  <select id="allowedHits" name="hitsAllowed">
+      <option value=""></option>
+      <option value="0-100"> 0 - 100</option>
+      <option value="101-200">101 - 200</option>
+      <option value="201-300">201 - 300</option>
+      <option value="301-400">301 - 400</option>
+      <option value="401-500">401 - 500</option>
+      <option value="501-600">501 - 600</option>
+      <option value="601-700">601 - 700</option>
+      <option value="701-800">701 - 800</option>
+   </select>
+
+<label for="Strikes">Strikeouts</label>
+  <select id="Strikeouts" name="strikeouts">
+      <option value=""></option>
+      <option value="0-100"> 0 - 100</option>
+      <option value="101-200">101 - 200</option>
+      <option value="201-300">201 - 300</option>
+      <option value="301-400">301 - 400</option>
+      <option value="401-500">401 - 500</option>
+      <option value="501-600">501 - 600</option>
+  </select>
+
+  <label for="ERA">ERA</label>
+  <select id="earnedRunAverage" name="earnedRunAvg">
+      <option value=""></option>
+      <option value="0.00 - 0.99"> 0.00 - 0.99</option>
+      <option value="1.00 - 1.99">1.00 - 1.99</option>
+      <option value="2.00 - 2.99">2.00 - 2.99</option>
+      <option value="3.00 - 3.99">3.00 - 3.99</option>
+      <option value="4.00 - 4.99">4.00 - 4.99</option>
+      <option value="5.00 - 10.00">5.00 - 10.00</option>
+       <option value="10.00">> 10.00</option>
+  </select>
+
+  <label for="Walks">Walks</label>
+  <select id="Walks" name="walks">
+      <option value=""></option>
+      <option value="0-50"> 0 - 50</option>
+      <option value="51-100">51 - 100</option>
+      <option value="101-150">101 - 150</option>
+      <option value="151-200">151 - 200</option>
+      <option value="201-250">201 - 250</option>
+      <option value="251-300">251 - 300</option>
+  </select>
+
+    <input class = "submission" type="submit" value="Submit">
+
+  </form>
+</div>
+
+<div class="col-4" style="background-color: #ccddff">
+		<h1> Table </h1>
+			<style>table, th, tr, td {
+	   				border: 1px solid black;
+			}
+			table {
+    			border-collapse: collapse;
+			}
+			</style>
+			<table>
+				<tr>
+					{% for attributeName in attributeNames %}
+					<th>
+					{{ attributeName }}
+					</th>
+					{% endfor %}
+				</tr>
+			
+					<TBODY>
+						{% for tuple in tuples %}
+							<tr>
+								{% for attribute in tuple %}
+								<td>{{ attribute }}</td>
+								{% endfor %}
+							</tr>
+						{% endfor %}
+					</TBODY>
+
+			</table>
+ </div>
+ </div>
+</div>
+
+ <p style="white-space: pre; margin-bottom: 5%"></p>
+
+    <footer id="contact">
+            <div>
+              <p  style="font-size: 15px" class="foot">BaseballHub</p>
+              </div>
+              <div style="text-align: center">
+                <a href=" "
+                target="_blank">
+                <p class="foot">Contact Us!</p>
+              </a> 
+    </footer>
+
+  </body>
+
+ {% endblock %}
