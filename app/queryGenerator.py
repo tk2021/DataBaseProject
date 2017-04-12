@@ -1,5 +1,4 @@
-
-def battingQueryGenerator(playerName, year, team, position, battingAvg,
+def battingQueryGenerator(playerName, year, team, battingAvg,
                           hits, homeRuns, rbi, steals, stolenBasesRatio):
     Select = "Select distinct(p.name), b.year, t.name as Team, d.battingAvg, b.hits, b.homeruns, b.RBI, b.stolenBases, b.strikeouts, c.stolenBasesRatio, q.playerSalary, u.TotalASGSelections"
     From = " from TeamMember p, BattingStatistics b, Team t, (Select bat.batterID, bat.year, trunc((Sum(bat.hits)/(Sum(bat.atBats) + 0.00001) + 0.00001), 3) as battingAvg from BattingStatistics bat, TeamMember mem Where mem.teamMemberID = bat.batterID group by bat.batterID, bat.year) d, (select batter.batterId, batter.year, trunc((Sum(batter.stolenBases)/(Sum(batter.caughtStealing) + Sum(batter.stolenBases) + 0.00001)), 3) * 100 as stolenBasesRatio from BattingStatistics batter, TeamMember memberr Where memberr.teamMemberId = batter.batterId group by batter.batterID, batter.year) c, (select tm.TeamMemberID, NVL(s.year, 0) as salaryYear, NVL(s.salary, 0) as playerSalary from TeamMember tm FULL OUTER JOIN Salary s ON tm.teamMemberID = s.playerID Group by tm.teamMemberID, s.year, s.salary Order by s.salary desc) q, (select tmMem.teamMemberID, count(allS.gamesPlayed) as TotalASGSelections from Teammember tmMem FULL OUTER JOIN AllStar allS ON tmMem.teamMemberID = allS.AllStarID Group by tmMem.TeamMemberID Order By TotalASGSelections ASC) u"
@@ -25,7 +24,7 @@ def battingQueryGenerator(playerName, year, team, position, battingAvg,
         Query = Query + " and b.RBI >= " + rbi.split("-")[0] + " and b.RBI <= " + rbi.split("-")[1]
     if steals:
         steals.split("-")
-        Query = Query + " and b.steals >= " + steals.split("-")[0] + " and b.steals <= " + steals.split("-")[1]
+        Query = Query + " and b.stolenbases >= " + steals.split("-")[0] + " and b.stolenbases <= " + steals.split("-")[1]
     if stolenBasesRatio:
         stolenBasesRatio.split("-")
         Query = Query + " and c.stolenBasesRatio >= " + stolenBasesRatio.split("-")[0] + " and c.stolenBasesRatio <= " + stolenBasesRatio.split("-")[1]
