@@ -28,13 +28,13 @@ def battingQueryGenerator(playerName, year, team, battingAvg,
     if stolenBasesRatio:
         stolenBasesRatio.split("-")
         Query = Query + " and c.stolenBasesRatio >= " + stolenBasesRatio.split("-")[0] + " and c.stolenBasesRatio <= " + stolenBasesRatio.split("-")[1]
-    Query = Query + " Order by b.year asc;"
+    Query = Query + " Order by b.year asc"
     return (Query)
 
 def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
                             losses, completedGames, saves, hitsAllowed, strikeOuts,
                             era, walks):
-    Select = "Select distinct(p.name), s.year, t.name as Team, s.games, s.gamesStarted, s.wins, s.losses, s.completeGames, s.saves, s.hits, s.strikeouts, s.era, m.averageERAinSeason, s.walks, q.playerSalary, u.TotalASGSelections, r.WinPercentage, k.strikeoutPercentage"
+    Select = "Select distinct(p.name), s.year, t.name as Team, s.games, s.gamesStarted, s.wins, s.losses, s.completeGames, s.saves, s.hits, s.strikeouts, s.era, m.averageERAinSeason as averageERAinSeason, s.walks, q.playerSalary, u.TotalASGSelections, r.WinPercentage, k.strikeoutPercentage"
     From = " From teamMember p, pitcher s, team t, (select tm.TeamMemberID, NVL(s.year, 0) as salaryYear, NVL(s.salary, 0) as playerSalary from TeamMember tm FULL OUTER JOIN Salary s ON tm.teamMemberID = s.playerID Group by tm.teamMemberID, s.year, s.salary Order by s.salary desc) q, (select tmMem.teamMemberID, count(allS.gamesPlayed) as TotalASGSelections from Teammember tmMem FULL OUTER JOIN AllStar allS ON tmMem.teamMemberID = allS.AllStarID Group by tmMem.TeamMemberID Order By TotalASGSelections ASC) u, (select pit.PitcherID, pit.year, trunc((Sum(pit.Wins)/(Sum(pit.Games) + 0.00001)), 3) * 100 as WinPercentage from Pitcher pit, TeamMember memberr where memberr.teamMemberID = pit.pitcherID group by pit.pitcherID, pit.year) r, (select distinct(pitt.year), trunc(AVG(pitt.era), 3) as AverageERAinSeason from Pitcher pitt group by pitt.year) m, (select pi.pitcherID, pi.year, trunc((Sum(pi.strikeOuts)/(Sum(pi.outsPitched) + 0.00001)), 3) * 100 as strikeoutPercentage from Pitcher pi, TeamMember tm where tm.teamMemberID = pi.pitcherID group by pi.pitcherID, pi.year) k"
     Where = " Where s.pitcherID = p.teamMemberID and s.teamID = t.teamID and q.teamMemberID = s.pitcherID and q.salaryYear = s.year and u.teamMemberId = s.pitcherID and r.pitcherId = s.pitcherId and r.year = s.year and s.year = m.year and k.pitcherID = s.pitcherID and k.year = s.year"
     Query = Select + From + Where
@@ -58,13 +58,13 @@ def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
         Query = Query + " and losses >= " + losses.split("-")[0] + " and losses <= " + losses.split("-")[1]
     if completedGames:
         completedGames.split("-")
-        Query = Query + " and completedGames >= " + completedGames.split("-")[0] + " and completedGames <= " + completedGames.split("-")[1]
+        Query = Query + " and completeGames >= " + completedGames.split("-")[0] + " and completeGames <= " + completedGames.split("-")[1]
     if saves:
         saves.split("-")
         Query = Query + " and saves >= " + saves.split("-")[0] + " and saves <= " + saves.split("-")[1]
     if hitsAllowed:
         hitsAllowed.split("-")
-        Query = Query + " and hitsAllowed >= " + hitsAllowed.split("-")[0] + " and hitsAllowed <= " + hitsAllowed.split("-")[1]
+        Query = Query + " and hits >= " + hitsAllowed.split("-")[0] + " and hits <= " + hitsAllowed.split("-")[1]
     if strikeOuts:
         strikeOuts.split("-")
         Query = Query + " and strikeOuts >= " + strikeOuts.split("-")[0] + " and strikeOuts <= " + strikeOuts.split("-")[1]
@@ -74,7 +74,7 @@ def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
     if walks:
         walks.split("-")
         Query = Query + " and walks >= " + walks.split("-")[0] + " and walks <= " + walks.split("-")[1]
-    Query = Query + " Order by s.year asc;"
+    Query = Query + " Order by s.year asc"
     return (Query)
 
 def fieldingQueryGenerator(playerName, year, team, position, games, assists,
@@ -106,11 +106,11 @@ def fieldingQueryGenerator(playerName, year, team, position, games, assists,
         Query = Query + " and stolenBasesAllowed >= " + stolenBasesAllowed.split("-")[0] + " and stolenBasesAllowed <= " + stolenBasesAllowed.split("-")[1]
     if doublePlaysCaused:
         doublePlaysCaused.split("-")
-        Query = Query + " and doublePlaysCaused >= " + doublePlaysCaused.split("-")[0] + " and doublePlaysCaused <= " + doublePlaysCaused.split("-")[1]
+        Query = Query + " and doublePlays >= " + doublePlaysCaused.split("-")[0] + " and doublePlays <= " + doublePlaysCaused.split("-")[1]
     if wildPitches:
         wildPitches.split("-")
         Query = Query + " and wildPitches >= " + wildPitches.split("-")[0] + " and wildPitches <= " + wildPitches.split("-")[1]
-    Query = Query + " Order by f.year asc;"
+    Query = Query + " Order by f.year asc"
     return (Query)
 
 #print(battingQueryGenerator(None, None, None, None, None, None, None, None, None, None))
