@@ -8,15 +8,15 @@
 <p style="white-space: pre; margin-bottom: 2%"></p>
   
  <div class = "playerTypeBox">
-  <form style="display: inline" action="statsPage.html" method="get">
+  <form style="display: inline" action="{{ url_for('batting') }}" method="POST">
   <button class = "playerType">Batting</button>
   </form>
 
-  <form style="display: inline" action="PitchingPage.html" method="get">
+  <form style="display: inline" action="{{ url_for('pitching') }}" method="POST">
   <button class = "playerType">Pitching</button>
   </form>
 
-  <form style="display: inline" action="FieldingPage.html" method="get">
+  <form style="display: inline" action="{{ url_for('fielding') }}" method="POST">
   <button class = "playerType" style="background-color: #00001a">Fielding</button>
   </form>
 </div>
@@ -82,7 +82,7 @@
   <label for="Games">Games</label>
   <select id="Games" name="games">
       <option value=""></option>
-      <option value="0-20">0 - 20</option>
+      <option value="1-20">1 - 20</option>
       <option value="21-40">21 - 40</option>
       <option value="41-60">41 - 60</option>
       <option value="61-80">61 - 80</option>
@@ -97,7 +97,7 @@
 <label for="assists">Assists</label>
   <select id="assists" name="assists">
       <option value=""></option>
-      <option value="0-10">0 - 10</option>
+      <option value="1-10">1 - 10</option>
       <option value="11-20">11 - 20</option>
       <option value="21-30">21 - 30</option>
       <option value="31-40">31 - 40</option>
@@ -108,7 +108,7 @@
   <label for="CaughtStealing">Caught Stealing</label>
   <select id="CS" name="caughtSteal">
       <option value=""></option>
-      <option value="0-15">0 - 15</option>
+      <option value="1-15">1 - 15</option>
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
       <option value="46-60">46 - 60</option>
@@ -119,7 +119,7 @@
   <label for="StolenBasesAllowed">Stolen Bases Allowed</label>
   <select id="SBA" name="stolenBA">
       <option value=""></option>
-      <option value="0-15">0 - 15</option>
+      <option value="1-15">1 - 15</option>
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
       <option value="46-60">46 - 60</option>
@@ -131,7 +131,7 @@
    <label for="DP">Double Plays Caused</label>
   <select id="DoublePlayCaused" name="doublePC">
       <option value=""></option>
-      <option value="0-50"> 0 - 50</option>
+      <option value="1-50"> 1 - 50</option>
       <option value="51-100">51 - 100</option>
       <option value="101-150">101 - 150</option>
       <option value="151-200">151 - 200</option>
@@ -191,20 +191,5 @@
  </div>
  </div>
 </div>
-
- <p style="white-space: pre; margin-bottom: 5%"></p>
-
-    <footer id="contact">
-            <div>
-              <p  style="font-size: 15px" class="foot">BaseballHub</p>
-              </div>
-              <div style="text-align: center">
-                <a href=" "
-                target="_blank">
-                <p class="foot">Contact Us!</p>
-              </a> 
-    </footer>
-
-  </body>
   
  {% endblock %}

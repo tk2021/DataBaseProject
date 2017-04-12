@@ -7,16 +7,16 @@
 <p style="white-space: pre; margin-bottom: 2%"></p>
   
 <div class = "playerTypeBox">
-  <form style="display: inline" action="statsPage.html" method="get">
-  <button class = "playerType" style="background-color: #00001a">Batting</button>
+  <form style="display: inline" action="{{ url_for('batting') }}" method="POST">
+  <button type="submit" class = "playerType" style="background-color: #00001a">Batting</button>
   </form>
 
-  <form style="display: inline" action="PitchingPage.html" method="get">
-  <button class = "playerType">Pitching</button>
+  <form style="display: inline" action="{{ url_for('pitching') }}" method="POST">
+  <button type="submit" class = "playerType">Pitching</button>
   </form>
 
-  <form style="display: inline" action="FieldingPage.html" method="get">
-  <button class = "playerType">Fielding</button>
+  <form style="display: inline" action="{{ url_for('fielding') }}" method="POST">
+  <button type="submit" class = "playerType">Fielding</button>
   </form>
 </div>
 
@@ -83,7 +83,7 @@
    <label for="Hits">Home Runs</label>
    <select id="HomeRuns" name="HR">
       <option value=""></option>
-      <option value="0-20">0 - 20</option>
+      <option value="1-20">1 - 20</option>
       <option value="21-40">21 - 40</option>
       <option value="41-60">41 - 60</option>
       <option value="61-80">61 - 80</option>
@@ -92,7 +92,7 @@
    <label for="Hits">Hits</label>
    <select id="Hits" name="hits">
       <option value=""></option>
-      <option value="0-50">0 - 50</option>
+      <option value="1-50">1 - 50</option>
       <option value="51-100">51 - 100</option>
       <option value="101-150">101 - 150</option>
       <option value="151-200">151 - 200</option>
@@ -103,19 +103,15 @@
    <label for="RBI">RBI</label>
    <select id="RBI" name="rbi">
       <option value=""></option>
-      <option value="0-50">0 - 50</option>
-      <option value="51-100">51 - 100</option>
-      <option value="101-150">101 - 150</option>
-      <option value="151-200">151 - 200</option>
+      <option value="1-100">1 - 100</option>
+      <option value="101-200">101 - 200</option>
    </select>
 
    <label for="Steals">Steals</label>
    <select id="Steals" name="steals">
       <option value=""></option>
-      <option value="0-30">0 - 30</option>
-      <option value="31-60">31 - 60</option>
-      <option value="61-90">61 - 90</option>
-      <option value="91-120">91 - 120</option>
+      <option value="1-60">1 - 60</option>
+      <option value="61-120">61 - 120</option>
       <option value="121-150">121 - 150</option>
    </select>
 
@@ -166,20 +162,5 @@
  </div>
  </div>
 </div>
-
- <p style="white-space: pre; margin-bottom: 5%"></p>
-
-    <footer id="contact">
-            <div>
-              <p  style="font-size: 15px" class="foot">BaseballHub</p>
-              </div>
-              <div style="text-align: center">
-                <a href=" "
-                target="_blank">
-                <p class="foot">Contact Us!</p>
-              </a> 
-    </footer>
-
-  </body>
 
  {% endblock %}

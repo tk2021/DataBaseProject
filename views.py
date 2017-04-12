@@ -102,12 +102,11 @@ def displayTables(teammemberID):
                             tuples = tuples
                             )
 
-@app.route('/form_test', methods=['GET', 'POST'])
-def form_test():
-    form = Fielding()
-    if form.validate_on_submit():
-        return redirect(url_for('form_tester', form = form.pName.data))
-    return render_template('FieldTester.html', form = form
+
+
+@app.route('/hubPage', methods=['GET', 'POST'])
+def hubPage():
+    return render_template('DBHomePage.html'
                             )
 
 @app.route('/batting', methods=['GET', 'POST'])
@@ -121,7 +120,6 @@ def battingQ():
         pName = request.form.get('pName')
         year = request.form.get('year')
         team = request.form.get('team')
-        position = None;
         battingAvg = request.form.get('BAvg');
         HR = request.form.get('HR');
         hits = request.form.get('hits');
@@ -130,10 +128,9 @@ def battingQ():
         
         stolenBasesRatio = None;
 
-        queryCursor = getQueryCursor(battingQueryGenerator(pName, year, team, position, battingAvg,
+        queryCursor = getQueryCursor(battingQueryGenerator(pName, year, team, battingAvg,
                             hits, HR,rbi, steals, stolenBasesRatio))
-
-        print (team)
+        
         #queryCursor = getQueryCursor("select * from teammember where name = '" + pName + "'")
         attributeNames = getAttributeDescriptions(queryCursor)
         tuples = queryCursor.fetchall()

@@ -1,0 +1,229 @@
+<html html lang="en">
+	<head>
+		<meta charset = "utf-8">
+		<title> Baseball Hub </title>
+		<meta name = "viewport" content = "width-device-width, initial scale = 1.0">
+
+		<link href="styleSheet.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<style>
+select {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.submission[type=submit] {
+    width: 100%;
+    background-color: #0059b3;
+    color: white;
+    padding: 12px 14px;
+    margin: 8px 0;
+    border: 1px solid #888;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.playerTypeBox{
+  width: 25%;
+   padding: 7px;
+   display: inline-block;
+}
+.playerType{
+  background-color: #000066;
+  color: white;
+  padding: 12px 14px;
+    border: 1px solid #AAA;
+    border-radius: 8px;
+    margin: 4px 2px;
+}
+input[type=number]{
+    width: 100%;
+    padding: 12px 14px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.submission[type=submit]:hover {
+    background-color: #00264d;
+}
+
+.grid-container {
+	width: 100%;
+	max-width: 1200px;
+}
+
+.row-before,
+.row-after{
+	content: "";
+	display: table;
+	 clear: both;
+}
+/* width = width of the container/total number of columns */
+[class*='col-']{
+	float: left;
+	min-height: 1px;
+	border-radius: 8px;
+    background-color: #99ccff;
+    padding: 20px;
+}
+
+.col-1{ width: 20%; }
+.col-2{ width: 40% }
+.col-3{ width: 60%; }
+.col-4{ width: 80%; }
+.col-5{ width: 100%; }
+
+* {
+	box-sizing: border-box;
+}
+
+.outline, .outline *{
+}
+
+[class*='col-'] > p {
+
+ text-align: center; 
+}
+ .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+  
+
+h2  {
+	font-family: 'Open Sans',sans-serif;
+	margin-bottom: 35px;
+	font-size: 3em;
+	letter-spacing: .2em;
+}
+
+
+
+body, html { height: 100%; }
+
+.arrow {
+	position: absolute;
+	bottom: 0px;
+	opacity: .6;
+}
+.arrow i {
+	color: black;
+}
+
+ a:link {
+    text-decoration: none;
+    color:  #464646;
+}
+
+ a:visited {
+    text-decoration: none;
+    color:  #464646;
+}
+
+footer a:hover {
+    text-decoration: underline;
+
+}
+
+ footer a:active {
+    text-decoration: underline;
+}
+
+
+.link-underline:link {
+	color: #000;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #000;
+}
+.link-underline:hover {
+	border-bottom: 1px dashed #000;
+}
+
+li a.active {
+    background-color: #000;
+    color: white;
+}
+
+footer {
+	text-align: center;
+	height: 10%;
+	bottom: 0;
+	padding-top: 0%;
+	padding-bottom: 0%;
+	background-color: #181919;
+	color: #464646;
+}
+
+
+.foot{
+	font-size: 12px;
+	text-transform: uppercase;
+	font-family: FuturaStd-Heavy;
+	letter-spacing: .18em;
+	text-align:center;
+}
+
+</style>
+
+  </head>
+  
+	<body body style="background-color:  #ccddff">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="{{ url_for('hubPage') }}">BaseballHub</a>
+			</div>
+			<ul class="nav navbar-nav">
+			  <li><a href="{{ url_for('hubPage') }}">Home</a></li>
+			  <li class= "active"><a href="{{ url_for('batting') }}">Check Out Stats!</a></li>
+			  <li><a href="teamPage.html">Pick Your Team!</a></li>
+			</ul>
+			<form class="navbar-form navbar-left" action="{{ url_for('batting') }}" method="get">
+			  <div class="input-group">
+				<input type="text" class="form-control" placeholder="Search">
+				<div class="input-group-btn">
+				  <button class="btn btn-default" type="submit">
+					<i class="glyphicon glyphicon-search"></i>
+				  </button>
+				</div>
+			  </div>
+			</form>
+		  </div>
+		</nav>
+		
+		<hr>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<ul>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+		{% endwith %}
+		{% block content %}{% endblock %}
+	</body>
+	
+	<p style="white-space: pre; margin-bottom: 5%"></p>
+
+    <footer id="contact">
+            <div>
+              <p  style="font-size: 15px" class="foot">BaseballHub</p>
+              </div>
+              <div style="text-align: center">
+                <a href=" "
+                target="_blank">
+                <p class="foot">Contact Us!</p>
+              </a> 
+    </footer>
+</html>
