@@ -1,9 +1,9 @@
 
 def battingQueryGenerator(playerName, year, team, position, battingAvg,
                           hits, homeRuns, rbi, steals, stolenBasesRatio):
-    Select = "Select distinct p.name, b.year, t.name as Team, d.battingAvg, b.hits, b.homeruns, b.RBI, b.stolenBases, b.strikeouts, c.stolenBasesRatio"
-    From = " from TeamMember p, BattingStatistics b, AllStar a, Team t, (Select bat.batterID, bat.year, trunc((Sum(bat.hits)/Sum(bat.atBats) + 0.00001), 3) as battingAvg from BattingStatistics bat, TeamMember mem Where mem.teamMemberID = bat.batterID group by bat.batterID, bat.year) d, (select batter.batterId, batter.year, trunc((Sum(batter.stolenBases)/(Sum(batter.caughtStealing) + Sum(batter.stolenBases) + 0.00001)), 3) * 100 as stolenBasesRatio from BattingStatistics batter, TeamMember memberr Where memberr.teamMemberId = batter.batterId group by batter.batterID, batter.year) c"
-    Where = " Where p.teamMemberID = b.batterID and b.teamID = t.teamID and d.batterId = b.batterId and d.year = b.year and c.year = b.year and c.batterId = b.batterId"
+    Select = "Select distinct(p.name), b.year, t.name as Team, d.battingAvg, b.hits, b.homeruns, b.RBI, b.stolenBases, b.strikeouts, c.stolenBasesRatio, q.playerSalary, u.TotalASGSelections"
+    From = " from TeamMember p, BattingStatistics b, Team t, (Select bat.batterID, bat.year, trunc((Sum(bat.hits)/(Sum(bat.atBats) + 0.00001) + 0.00001), 3) as battingAvg from BattingStatistics bat, TeamMember mem Where mem.teamMemberID = bat.batterID group by bat.batterID, bat.year) d, (select batter.batterId, batter.year, trunc((Sum(batter.stolenBases)/(Sum(batter.caughtStealing) + Sum(batter.stolenBases) + 0.00001)), 3) * 100 as stolenBasesRatio from BattingStatistics batter, TeamMember memberr Where memberr.teamMemberId = batter.batterId group by batter.batterID, batter.year) c, (select tm.TeamMemberID, NVL(s.year, 0) as salaryYear, NVL(s.salary, 0) as playerSalary from TeamMember tm FULL OUTER JOIN Salary s ON tm.teamMemberID = s.playerID Group by tm.teamMemberID, s.year, s.salary Order by s.salary desc) q, (select tmMem.teamMemberID, count(allS.gamesPlayed) as TotalASGSelections from Teammember tmMem FULL OUTER JOIN AllStar allS ON tmMem.teamMemberID = allS.AllStarID Group by tmMem.TeamMemberID Order By TotalASGSelections ASC) u"
+    Where = " Where p.teamMemberID = b.batterID and b.teamID = t.teamID and d.batterId = b.batterId and d.year = b.year and c.year = b.year and c.batterId = b.batterId and q.teamMemberID = b.batterID and q.salaryYear = b.year and u.teamMemberId = b.batterId"
     Query = Select + From + Where
     if playerName:
         Query = Query + " and p.name like \'%" + playerName + "%\'"
@@ -35,9 +35,9 @@ def battingQueryGenerator(playerName, year, team, position, battingAvg,
 def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
                             losses, completedGames, saves, hitsAllowed, strikeOuts,
                             era, walks):
-    Select = "Select distinct p.name, s.year, t.name as Team, s.games, s.gamesStarted, s.wins, s.losses, s.completeGames, s.saves, s.hits, s.strikeouts, s.era, s.walks"
-    From = " From teamMember p, pitcher s, team t, allstars a"
-    Where = " Where s.pitcherID = p.teamMemberID and s.teamID = t.teamID"
+    Select = "Select distinct(p.name), s.year, t.name as Team, s.games, s.gamesStarted, s.wins, s.losses, s.completeGames, s.saves, s.hits, s.strikeouts, s.era, m.averageERAinSeason, s.walks, q.playerSalary, u.TotalASGSelections, r.WinPercentage, k.strikeoutPercentage"
+    From = " From teamMember p, pitcher s, team t, (select tm.TeamMemberID, NVL(s.year, 0) as salaryYear, NVL(s.salary, 0) as playerSalary from TeamMember tm FULL OUTER JOIN Salary s ON tm.teamMemberID = s.playerID Group by tm.teamMemberID, s.year, s.salary Order by s.salary desc) q, (select tmMem.teamMemberID, count(allS.gamesPlayed) as TotalASGSelections from Teammember tmMem FULL OUTER JOIN AllStar allS ON tmMem.teamMemberID = allS.AllStarID Group by tmMem.TeamMemberID Order By TotalASGSelections ASC) u, (select pit.PitcherID, pit.year, trunc((Sum(pit.Wins)/(Sum(pit.Games) + 0.00001)), 3) * 100 as WinPercentage from Pitcher pit, TeamMember memberr where memberr.teamMemberID = pit.pitcherID group by pit.pitcherID, pit.year) r, (select distinct(pitt.year), trunc(AVG(pitt.era), 3) as AverageERAinSeason from Pitcher pitt group by pitt.year) m, (select pi.pitcherID, pi.year, trunc((Sum(pi.strikeOuts)/(Sum(pi.outsPitched) + 0.00001)), 3) * 100 as strikeoutPercentage from Pitcher pi, TeamMember tm where tm.teamMemberID = pi.pitcherID group by pi.pitcherID, pi.year) k"
+    Where = " Where s.pitcherID = p.teamMemberID and s.teamID = t.teamID and q.teamMemberID = s.pitcherID and q.salaryYear = s.year and u.teamMemberId = s.pitcherID and r.pitcherId = s.pitcherId and r.year = s.year and s.year = m.year and k.pitcherID = s.pitcherID and k.year = s.year"
     Query = Select + From + Where
     if playerName:
         Query = Query + " and p.name like \'%" + playerName + "%\'"
@@ -75,15 +75,15 @@ def pitchingQueryGenerator(playerName, year, team, games, gamesStarted, wins,
     if walks:
         walks.split("-")
         Query = Query + " and walks >= " + walks.split("-")[0] + " and walks <= " + walks.split("-")[1]
-    Query = Query + "Order by s.year asc;"
+    Query = Query + " Order by s.year asc;"
     return (Query)
 
 def fieldingQueryGenerator(playerName, year, team, position, games, assists,
                             caughtStealing, stolenBasesAllowed, doublePlaysCaused,
                             wildPitches):
-    Select = "Select distinct p.name, f.year, t.name as Team, f.position, f.games, f.assists, f.caughtStealing, f.stolenBasesAllowed, f.doublePlays, f.wildPitches"
-    From = " From teamMember p, defensiveStatistics f, Team t"
-    Where = " Where p.teamMemberID = f.defenderID and f.teamID = t.teamID"
+    Select = "Select distinct p.name, f.year, t.name as Team, f.position, f.games, f.assists, f.caughtStealing, f.stolenBasesAllowed, f.doublePlays, f.wildPitches, u.TotalASGSelections, f.errors, z.stealsPreventedPercentage, y.gameStartedPercentage"
+    From = " From teamMember p, defensiveStatistics f, Team t, (select tm.TeamMemberID, NVL(s.year, 0) as salaryYear, NVL(s.salary, 0) as playerSalary from TeamMember tm FULL OUTER JOIN Salary s ON tm.teamMemberID = s.playerID Group by tm.teamMemberID, s.year, s.salary Order by s.salary desc) q, (select tmMem.teamMemberID, count(allS.gamesPlayed) as TotalASGSelections from Teammember tmMem FULL OUTER JOIN AllStar allS ON tmMem.teamMemberID = allS.AllStarID Group by tmMem.TeamMemberID Order By TotalASGSelections ASC) u, (select def.defenderID, def.year, trunc((Sum(def.caughtStealing)/(Sum(def.caughtStealing) + Sum(def.stolenBasesAllowed) + 0.00001)), 3) * 100 as stealsPreventedPercentage from DefensiveStatistics def, TeamMember memberr where memberr.teamMemberID = def.defenderID group by def.defenderID, def.year) z, (select x.defenderID, x.year, trunc((Sum(x.GAMESSTARTED)/(Sum(x.games) + 0.00001)), 3) * 100 as gameStartedPercentage from DefensiveStatistics x, TeamMember mem Where mem.teamMemberID = x.defenderID group by x.defenderID, x.year) y"
+    Where = " Where p.teamMemberID = f.defenderID and f.teamID = t.teamID and q.teamMemberID = f.defenderID and q.salaryYear = f.year and u.teamMemberId = f.defenderID and z.defenderID = f.defenderID and z.year = f.year and y.defenderID = f.defenderID and y.year = f.year"
     Query = Select + From + Where
     if playerName:
         Query = Query + " and p.name like \'%" + playerName + "%\'"
@@ -114,4 +114,6 @@ def fieldingQueryGenerator(playerName, year, team, position, games, assists,
     Query = Query + " Order by f.year asc;"
     return (Query)
 
-print(battingQueryGenerator(None, "1997", "Marlins", None, None, None, "10-40", None, None, None))
+#print(battingQueryGenerator(None, None, None, None, None, None, None, None, None, None))
+#print(fieldingQueryGenerator(None, None, None, None, None, None,None, None, None,None))
+#print(pitchingQueryGenerator(None, None, None, None, None, None, None, None, None, None, None, None, None))
