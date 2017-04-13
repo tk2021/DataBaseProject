@@ -10,6 +10,27 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		<style>
+
+tr:hover{background-color: #96abce}
+
+th,td{
+	padding: 8px;
+	text-align: center;
+	vertical-align: middle;
+}		
+
+tr:nth-child(even) {background-color: #3366ff}
+
+th{
+	height: 30px;
+	background-color: #000099;
+	color: white;
+
+}
+table{
+	border-spacing:0;
+	width: 100%;
+}
 select {
     width: 100%;
     padding: 12px 14px;
@@ -186,7 +207,6 @@ footer {
 			<ul class="nav navbar-nav">
 			  <li><a href="{{ url_for('hubPage') }}">Home</a></li>
 			  <li class= "active"><a href="{{ url_for('batting') }}">Check Out Stats!</a></li>
-			  <li><a href="teamPage.html">Pick Your Team!</a></li>
 			</ul>
 			<form class="navbar-form navbar-left" action="{{ url_for('batting') }}" method="get">
 			  <div class="input-group">

@@ -109,7 +109,6 @@
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
       <option value="46-60">46 - 60</option>
-      <option value="61-75">61 - 75</option>
    </select>
 
    <label for="Wins">Wins</label>
@@ -118,7 +117,6 @@
       <option value="1-15">1 - 15</option>
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
-      <option value="46-60">46 - 60</option>
   </select>
 
   <label for="Losses">Losses</label>
@@ -127,7 +125,6 @@
       <option value="1-15">1 - 15</option>
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
-      <option value="46-60">46 - 60</option>
   </select>
 
    <label for="completedGames">Complete Games</label>
@@ -136,8 +133,6 @@
       <option value="1-15">1 - 15</option>
       <option value="16-30">16 - 30</option>
       <option value="31-45">31 - 45</option>
-      <option value="46-60">46 - 60</option>
-      <option value="61-75">61 - 75</option>
    </select>
 
     <label for="Saves">Saves</label>
@@ -183,7 +178,6 @@
       <option value="3.00 - 3.99">3.00 - 3.99</option>
       <option value="4.00 - 4.99">4.00 - 4.99</option>
       <option value="5.00 - 10.00">5.00 - 10.00</option>
-       <option value="10.00">> 10.00</option>
   </select>
 
   <label for="Walks">Walks</label>
@@ -203,14 +197,8 @@
 </div>
 
 <div class="col-4" style="background-color: #ccddff">
-		<h1> Table </h1>
-			<style>table, th, tr, td {
-	   				border: 1px solid black;
-			}
-			table {
-    			border-collapse: collapse;
-			}
-			</style>
+		<h1 style= "text-align: center;"> <u> Pitching Statistics </u> </h1>
+			<div style= "overflow-x: auto; border-radius: 5px; border-style: solid; border-color: #003399">
 			<table>
 				<tr>
 					{% for attributeName in attributeNames %}
@@ -231,6 +219,7 @@
 					</TBODY>
 
 			</table>
+			</div>
  </div>
  </div>
 </div>

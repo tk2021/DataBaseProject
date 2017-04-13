@@ -5,7 +5,7 @@ from app import db_functions
 from .db_functions import db_test
 from.tupleObject import tupleObject
 from app import cx_oracle_test
-from .queryGenerator import battingQueryGenerator, pitchingQueryGenerator, fieldingQueryGenerator
+from .queryGenerator import battingQueryGenerator, pitchingQueryGenerator, fieldingQueryGenerator, pitchingQueryGeneratorNoSalary, battingQueryGeneratorNoSalary, fieldingQueryGeneratorNoSalary
 from .cx_oracle_test import cx_oracle_test, getQueryCursor, getAttributeDescriptions
 import cx_Oracle
 from flask import request
@@ -128,7 +128,11 @@ def battingQ():
         
         stolenBasesRatio = None;
 
-        queryCursor = getQueryCursor(battingQueryGenerator(pName, year, team, battingAvg,
+        if year != '' and int(year) < 1985:
+            queryCursor = getQueryCursor(battingQueryGeneratorNoSalary(pName, year, team, battingAvg,
+                            hits, HR,rbi, steals, stolenBasesRatio))
+        else:
+            queryCursor = getQueryCursor(battingQueryGenerator(pName, year, team, battingAvg,
                             hits, HR,rbi, steals, stolenBasesRatio))
         
         #queryCursor = getQueryCursor("select * from teammember where name = '" + pName + "'")
@@ -160,11 +164,16 @@ def pitchingQ():
         hitsAllowed = request.form.get('hitsAllowed');
         strikeOuts = request.form.get('strikeouts');
         era = request.form.get('earnedRunAvg');
-        walks = request.form.get('walks'); 
+        walks = request.form.get('walks');
 
-        queryCursor = getQueryCursor(pitchingQueryGenerator(pName, year, team, games, gamesStarted, wins,
-                            losses, completedGames, saves, hitsAllowed, strikeOuts,
-                            era, walks))
+        if year != '' and int(year) < 1985:
+            queryCursor = getQueryCursor(pitchingQueryGeneratorNoSalary(pName, year, team, games, gamesStarted, wins,
+                          losses, completedGames, saves, hitsAllowed, strikeOuts,
+                          era, walks))
+        else:
+            queryCursor = getQueryCursor(pitchingQueryGenerator(pName, year, team, games, gamesStarted, wins,
+                          losses, completedGames, saves, hitsAllowed, strikeOuts,
+                          era, walks))
 
         attributeNames = getAttributeDescriptions(queryCursor)
         tuples = queryCursor.fetchall()
@@ -192,7 +201,13 @@ def fieldingQ():
         doublePC = request.form.get('doublePC');
         wildP = request.form.get('wildP'); 
 
-        queryCursor = getQueryCursor(fieldingQueryGenerator(pName, year, team, positions, games, assists,
+        print(pName)
+
+        if year != '' and int(year) < 1985:
+            queryCursor = getQueryCursor(fieldingQueryGeneratorNoSalary(pName, year, team, positions, games, assists,
+                            caughtStealing, stolenBA, doublePC, wildP))
+        else:
+            queryCursor = getQueryCursor(fieldingQueryGenerator(pName, year, team, positions, games, assists,
                             caughtStealing, stolenBA, doublePC, wildP))
 
         attributeNames = getAttributeDescriptions(queryCursor)
